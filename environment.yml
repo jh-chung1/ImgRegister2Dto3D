@@ -1,0 +1,19 @@
+name: ImgRegister2Dto3D
+channels:
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/r
+dependencies:
+  - python=3.9
+  - matplotlib
+  - numpy
+  - scipy
+  - anaconda::spyder
+  - conda-forge::porespy
+  - anaconda::joblib
+  - conda-forge::gpyopt
+  - conda-forge::plotly
+  - conda-forge::mayavi
+  - conda-forge::pyvista
+  - anaconda::scikit-learn
+  - conda-forge::opencv
+prefix: /Users/jhchung1/miniconda3/envs/ImgRegister2Dto3D
