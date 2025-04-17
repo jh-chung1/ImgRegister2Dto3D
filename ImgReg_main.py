@@ -19,6 +19,7 @@ parser.add_argument('--Template_dir', type=str, default='/scratch/users/jhchung1
 parser.add_argument('--TS_tiff_data_dir', type=str, default='/scratch/users/jhchung1/github_test/ImgRegister2Dto3D.github/data/B1M1_TS_10X_PPL_13776_8460.tiff', help='Thin section tiff image dir')
 parser.add_argument('--cpu_num', type=int, default=24, help='rotation number')
 parser.add_argument('--test_type', type=str, choices=['Real_BereaSandstone', 'Validation_SpherePack'], default='Real_BereaSandstone', help='Type of test data')
+parser.add_argument('--section_axis', type=int, choices=[0, 1, 2], default=2, help='Axis along which to extract 2D section')
 args = parser.parse_args()
 
 # *** Modify with your initial directory to save the results ***
@@ -43,13 +44,13 @@ if __name__ == "__main__":
     
     # Record loss at each iteration
     loss_history = []
-    callback = get_record_loss_callback(CT_img, template, loss_history)
+    callback = get_record_loss_callback(CT_img, template, args.section_axis, loss_history)
 
     # Run the optimization
     result = differential_evolution(
         objective_function, 
         bounds, 
-        args=(CT_img, template), 
+        args=(CT_img, template, args.section_axis), 
         strategy='best1bin', 
         maxiter=2000,  
         popsize=50,  

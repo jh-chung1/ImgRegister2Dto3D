@@ -94,11 +94,20 @@ def rotate_3Dimg(image_3d, rotation_angles):
 
     return rotated_z
 
-def sect(rotated_3D, sect_no):
+def sect(rotated_3D, sect_no, section_axis=2):
     """
-    Pick one section in rotated 3D image to specify "image" in template matching
+    Pick one section in rotated 3D image to specify "image" in template matching.
+    section_axis: 0, 1, or 2. Default is 2.
     """
-    return rotated_3D[:, :, sect_no]
+    if section_axis == 0:
+        return rotated_3D[sect_no, :, :]
+    elif section_axis == 1:
+        return rotated_3D[:, sect_no, :]
+    elif section_axis == 2:
+        return rotated_3D[:, :, sect_no]
+    else:
+        raise ValueError("section_axis must be 0, 1, or 2")
+
 
 def custom_initial_population(bounds, initial_values, popsize, dim):
     pop = np.random.uniform(
